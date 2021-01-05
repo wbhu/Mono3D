@@ -14,13 +14,42 @@ Mono3D is the implementation of mono-nizing binocular videos into a regular mono
 
 Please refer to [env.yaml](./env.yaml).
 
-
-
 ## Dataset
 
 We cannot release the whole 3D movie dataset due to copyright issues. But the binocular image dataset and part of the binocular video dataset used in the paper are publicly available: [[ Flickr1024 ]](https://yingqianwang.github.io/Flickr1024/) and [[ Inria ]](https://www.di.ens.fr/willow/research/stereoseg/).
 
+### Prepare Flickr1024 for training the image version model
 
+1. Download Flickr1024 from the website: https://yingqianwang.github.io/Flickr1024/
+2. Download data list from: https://drive.google.com/drive/folders/14oeXizbqTCxbmkZblt7YbWjaU2IIqNJf?usp=sharing
+3. Organise the dataset as following (${DATASET is the root dir for maintaining our dataset}):
+
+  ```
+${DATASET}  
+|-- Flickr1024  
+|   |-- Train  
+|   |-- |-- 0001_L.png  
+|   |   |-- 0001_R.png
+|   |   |-- 0002_L.png  
+|   |   |-- 0002_R.png
+|   |   |-- ...
+|   |-- Validation  
+|   |-- |-- 0001_L.png  
+|   |   |-- 0001_R.png
+|   |   |-- 0002_L.png  
+|   |   |-- 0002_R.png
+|   |   |-- ...
+|   |-- Test 
+|   |-- |-- 0001_L.png  
+|   |   |-- 0001_R.png
+|   |   |-- 0002_L.png  
+|   |   |-- 0002_R.png
+|   |   |-- ...
+|   |-- list  
+|   |-- |-- train.txt
+|   |   |-- val.txt
+|   |   |-- test.txt  
+  ```
 
 ## Evaluation
 
@@ -38,17 +67,34 @@ $ sh scripts/test.sh mono3d_img config/Flickr1024/mono3d_img.yaml
 
 
 
-
-
-## Training
-
-Coming soon ...
-
-
-
 ## Copyright and License
 
 You are granted with the [LICENSE](./LICENSE) for both academic and commercial usages.
+
+
+
+## Acknowledgments
+
+Thanks [Yinqian Wang](https://yingqianwang.github.io) for releasing the great dataset, Flickr1024.
+
+
+
+## Citation
+
+```
+@article{hu-2020-mononizing,
+        author   = {Wenbo Hu and Menghan Xia and Chi-Wing Fu and Tien-Tsin Wong},
+        title    = {Mononizing Binocular Videos},
+        journal  = {ACM Transactions on Graphics (SIGGRAPH Asia 2020 issue)},
+        month    = {December},
+        year     = {2020},
+        volume   = {39},
+        number   = {6},
+        pages    = {228:1-228:16}
+    }
+```
+
+  
 
 
 
