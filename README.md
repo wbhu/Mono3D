@@ -12,9 +12,7 @@ Mono3D is the implementation of mono-nizing binocular videos into a regular mono
 
 ## Environment
 
-```
-Pytorch==1.2.0
-```
+Please refer to [env.yaml](./env.yaml).
 
 
 
@@ -26,7 +24,19 @@ We cannot release the whole 3D movie dataset due to copyright issues. But the bi
 
 ## Evaluation
 
-Coming soon ...
+- Demo on a single scene
+
+```shell
+$ python main/demo.py --left ./imgs/demo_L.png
+```
+
+- Evaluation on the testing set of Flickr1024
+
+```shell
+$ sh scripts/test.sh mono3d_img config/Flickr1024/mono3d_img.yaml
+```
+
+
 
 
 
@@ -36,9 +46,9 @@ Coming soon ...
 
 
 
+## Copyright and License
 
-
-
+You are granted with the [LICENSE](./LICENSE) for both academic and commercial usages.
 
 
 
