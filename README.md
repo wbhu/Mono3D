@@ -10,18 +10,28 @@ Mono3D is the implementation of mono-nizing binocular videos into a regular mono
 
 
 
+## Demo
+
+[[ Mononized view ]](https://wbhu.github.io/projects/Mono3D/demo/demo_mononize.html)  [[ Restored left view ]](https://wbhu.github.io/projects/Mono3D/demo/demo_restoreL.html)  [[ Restored right view ]](https://wbhu.github.io/projects/Mono3D/demo/demo_restoreR.html)  
+
+
+
 ## Environment
 
 Please refer to [env.yaml](./env.yaml).
+
+
 
 ## Dataset
 
 We cannot release the whole 3D movie dataset due to copyright issues. But the binocular image dataset and part of the binocular video dataset used in the paper are publicly available: [[ Flickr1024 ]](https://yingqianwang.github.io/Flickr1024/) and [[ Inria ]](https://www.di.ens.fr/willow/research/stereoseg/).
 
+
+
 ### Prepare Flickr1024 for training the image version model
 
 1. Download Flickr1024 from the website: https://yingqianwang.github.io/Flickr1024/
-2. Download data list from: https://drive.google.com/drive/folders/14oeXizbqTCxbmkZblt7YbWjaU2IIqNJf?usp=sharing
+2. Download data list from https://drive.google.com/drive/folders/14oeXizbqTCxbmkZblt7YbWjaU2IIqNJf?usp=sharing
 3. Organise the dataset as following (${DATASET is the root dir for maintaining our dataset}):
 
   ```
@@ -51,7 +61,11 @@ ${DATASET}
 |   |   |-- test.txt  
   ```
 
+
+
 ## Evaluation
+
+- Download pretrained model from https://drive.google.com/drive/folders/14oeXizbqTCxbmkZblt7YbWjaU2IIqNJf?usp=sharing, and put the 'mono3d_img.pth.tar' inside 'Exp/model_zoo'.
 
 - Demo on a single scene
 
@@ -64,6 +78,12 @@ $ python main/demo.py --left ./imgs/demo_L.png
 ```shell
 $ sh scripts/test.sh mono3d_img config/Flickr1024/mono3d_img.yaml
 ```
+
+
+
+## Training
+
+On the way ...
 
 
 
