@@ -70,7 +70,7 @@ ${DATASET}
 - Demo on a single scene
 
 ```shell
-$ python main/demo.py --left ./imgs/demo_L.png
+$ PYTHONPATH=. python main/demo.py --left ./imgs/demo_L.png
 ```
 
 - Evaluation on the testing set of Flickr1024
