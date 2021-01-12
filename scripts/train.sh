@@ -30,7 +30,6 @@ mkdir -p ${exp_dir}/result/best
 cp scripts/train.sh scripts/test.sh main/${TRAIN_CODE} main/${TEST_CODE} ${config} ${exp_dir}
 
 export PYTHONPATH=./
-#rm -rf /dev/shm/wbhu*
 echo $OMP_NUM_THREADS | tee -a ${exp_dir}/train-$now.log
 nvidia-smi | tee -a ${exp_dir}/train-$now.log
 which pip | tee -a ${exp_dir}/train-$now.log
@@ -42,14 +41,9 @@ $PYTHON -u ${exp_dir}/${TRAIN_CODE} \
 
 # TEST
 now=$(date +"%Y%m%d_%H%M%S")
-$PYTHON -u ${exp_dir}/${TEST_CODE} \
-  --config=${config} \
-  save_folder ${exp_dir}/result/last \
-  model_path ${model_dir}/model_last.pth.tar \
-  2>&1 | tee -a ${exp_dir}/test_last-$now.log
 
 $PYTHON -u ${exp_dir}/${TEST_CODE} \
   --config=${config} \
   save_folder ${exp_dir}/result/best \
   model_path ${model_dir}/model_best.pth.tar \
-  2>&1 | tee -a ${exp_dir}/test_best-$now.log
+  2>&1 | tee ${exp_dir}/test_best-$now.log

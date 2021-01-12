@@ -15,7 +15,6 @@ ________________________,--._(___Y___)_,--._______________________
 import torch.nn.functional as F
 import torch
 import torch.nn as nn
-from models.base_moudle import Warp
 
 
 def grad_l1_loss(y_input, y_target):
@@ -85,8 +84,6 @@ class InvertibilityLoss(nn.Module):
         self.cfg = cfg
 
     def forward(self, predict_l, predict_r, label_l, label_r):
-        # loss = F.mse_loss(predict_l, label_l) * (1.0 - self.cfg.right_weight) \
-        #        + F.mse_loss(predict_r, label_r) * self.cfg.right_weight
         loss = self.base_loss_f(predict_l, label_l) * (1.0 - self.cfg.right_weight) \
                + self.base_loss_f(predict_r, label_r) * self.cfg.right_weight
         return loss
@@ -94,25 +91,3 @@ class InvertibilityLoss(nn.Module):
 
 class InvertibilityLossMSE(InvertibilityLoss):
     base_loss_f = nn.MSELoss()
-
-
-class StereoLoss(nn.Module):
-    def __init__(self, mask_alpha=50.):
-        super(StereoLoss, self).__init__()
-        self.mask_alpha = mask_alpha
-        self.warper = Warp(height=256, width=256)
-
-    def forward(self, predict_l, predict_r, label_l, label_r, disp_l, disp_r):
-        predict_l2r = self.warper(predict_l, disp_r)
-        label_l2r = self.warper(label_l, disp_r)
-        diff = torch.sum(label_l2r - label_r, dim=1).pow(2)
-        mask = torch.exp(-self.mask_alpha * diff).unsqueeze(1)
-        loss_r = F.mse_loss(predict_l2r * mask, predict_r * mask)
-
-        predict_r2l = self.warper(predict_r, disp_l)
-        label_r2l = self.warper(label_r, disp_l)
-        diff = torch.sum(label_r2l - label_l, dim=1).pow(2)
-        mask = torch.exp(-self.mask_alpha * diff).unsqueeze(1)
-        loss_l = F.mse_loss(predict_r2l * mask, predict_l * mask)
-
-        return loss_l + loss_r
