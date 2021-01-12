@@ -63,7 +63,7 @@ ${DATASET}
 
 
 
-## Evaluation
+## Demo
 
 - Download pretrained model from https://drive.google.com/drive/folders/14oeXizbqTCxbmkZblt7YbWjaU2IIqNJf?usp=sharing, and put the 'mono3d_img.pth.tar' inside 'Exp/model_zoo'.
 
@@ -73,17 +73,23 @@ ${DATASET}
 $ PYTHONPATH=. python main/demo.py --left ./imgs/demo_L.png
 ```
 
-- Evaluation on the testing set of Flickr1024
-
-```shell
-$ sh scripts/test.sh mono3d_img config/Flickr1024/mono3d_img.yaml
-```
-
 
 
 ## Training
 
-On the way ...
+```
+$ sh scripts/train.sh mono3d_img config/Flickr1024/mono3d_img.yaml
+```
+
+
+
+## Evaluation
+
+Evaluation on the testing set of Flickr1024
+
+```shell
+$ sh scripts/test.sh mono3d_img config/Flickr1024/mono3d_img.yaml
+```
 
 
 
