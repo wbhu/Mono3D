@@ -10,7 +10,7 @@ Mono3D is the implementation of mono-nizing binocular videos into a regular mono
 
 
 
-## Demo
+## Online demo
 
 [[ Mononized view ]](https://wbhu.github.io/projects/Mono3D/demo/demo_mononize.html)  [[ Restored left view ]](https://wbhu.github.io/projects/Mono3D/demo/demo_restoreL.html)  [[ Restored right view ]](https://wbhu.github.io/projects/Mono3D/demo/demo_restoreR.html)  
 
