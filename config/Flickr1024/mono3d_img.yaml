@@ -1,0 +1,61 @@
+DATA:
+  data_name: Flickr1024
+  data_root: /uac/gds/wbhu/WORKSPACE/Dataset/Flickr1024
+  train_set: /uac/gds/wbhu/WORKSPACE/Dataset/Flickr1024/list/train.txt
+  val_set: /uac/gds/wbhu/WORKSPACE/Dataset/Flickr1024/list/val.txt
+  test_set: /uac/gds/wbhu/WORKSPACE/Dataset/Flickr1024/list/test.txt
+  loop: 20
+  base_resolution: 4
+  patch_size: 256
+  patch_size_val: 256
+
+
+LOSS:
+  lambda_invert: 1.7
+  alpha: 0.1
+  right_weight: 0.99
+  use_l1: False
+
+NETWORK:
+  arch: MBIResPDF
+  quantize: True
+
+
+TRAIN:
+  use_sgd: False
+  sync_bn: False  # adopt sync_bn or not
+  train_gpu: [0,1,2,3]
+  workers: 64  # data loader workers
+  batch_size: 16  # batch size for training
+  batch_size_val: 16  # batch size for validation during training, memory and speed tradeoff
+  base_lr: 0.0001
+  adaptive_lr: True
+  factor: 0.3
+  patience: 10
+  threshold: 0.00001
+  epochs: 200
+  start_epoch: 0
+  poly_lr: False
+  manual_seed: 131
+  print_freq: 10
+  save_freq: 1
+  save_path:
+  weight:
+  resume:
+  evaluate: True  # evaluate on validation set, extra gpu memory needed and small batch_size_val is recommend
+  eval_freq: 1
+
+Distributed:
+  dist_url: tcp://127.0.0.1:6701
+  dist_backend: 'nccl'
+  multiprocessing_distributed: True
+  world_size: 1
+  rank: 0
+
+TEST:
+  split: test  # split in [train, val and test]
+  test_workers: 0
+  test_gpu: [0]
+  test_batch_size: 1
+  model_path:
+  save_folder:
