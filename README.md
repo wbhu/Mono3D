@@ -20,6 +20,11 @@ Mono3D is the implementation of mono-nizing binocular videos into a regular mono
 
 Please refer to [env.yaml](./env.yaml).
 
+- Please carefully install following two packages with specific version, because the pretrained model is based on that version and newer versions are incompatible.
+```
+- mmcv==0.6.2
+- mmdet==2.2.1 (build from source)
+```
 
 
 ## Dataset
