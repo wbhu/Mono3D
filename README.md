@@ -106,7 +106,7 @@ You are granted with the [LICENSE](./LICENSE) for both academic and commercial u
 
 ## Acknowledgments
 
-Thanks [Yingqian Wang](https://yingqianwang.github.io) for releasing the great dataset, Flickr1024.
+Thanks to [Yingqian Wang](https://yingqianwang.github.io) for releasing the great dataset, Flickr1024.
 
 
 
