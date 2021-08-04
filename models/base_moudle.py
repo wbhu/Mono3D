@@ -1,3 +1,4 @@
+import numpy as np
 import torch.nn as nn
 from torch.nn import functional as F
 import torch
@@ -148,3 +149,23 @@ class DeformConvBlock(nn.Module):
         x = self.inConv(x)
         x = self.conv(x)
         return x
+
+
+class Warp(nn.Module):
+    def __init__(self, H=256, W=256):
+        super(Warp, self).__init__()
+        remapW, remapH = np.meshgrid(np.arange(W), np.arange(H))
+        reGrid = np.stack((2.0 * remapW / max(W - 1, 1) - 1.0, 2.0 * remapH / max(H - 1, 1) - 1.0), axis=-1)
+        reGrid = reGrid[np.newaxis, ...]
+        self.grid = torch.from_numpy(reGrid.astype(np.float32))
+        normalizer = np.zeros_like(reGrid)
+        normalizer[:, :, :, 0] = 2.0 / W
+        normalizer[:, :, :, 1] = 2.0 / H
+        self.normalizer = torch.from_numpy(normalizer.astype(np.float32))
+
+    def forward(self, x, flow):
+        # x is img, in N*C*H*W format
+        # flow is in N*2*H*W format
+        # flow[:,0,:,:] stand for W direction warp
+        grid = self.grid.cuda(flow.get_device()) + self.normalizer.cuda(flow.get_device()) * flow.permute(0, 2, 3, 1)
+        return F.grid_sample(x, grid, padding_mode='border', mode='bilinear')
